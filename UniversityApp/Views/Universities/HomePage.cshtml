@@ -1,0 +1,24 @@
+﻿@model IEnumerable<UniversityApp.Models.University>
+
+@{
+    ViewBag.Title = "HomePage";
+}
+
+<h2>Palestine Universities</h2>
+
+<br/>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="@Url.Content(item.Logo)" alt="..." width="242" height="200">
+                <div class="caption">
+                    <h3>@item.Name</h3>
+                    <p>...</p>
+                    <p><a href="@Url.Action("Details","Universities" , new { id = item.Id })" class="btn btn-primary" role="button">Details</a> </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

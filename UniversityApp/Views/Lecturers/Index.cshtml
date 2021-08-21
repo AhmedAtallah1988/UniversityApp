@@ -1,0 +1,80 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<UniversityApp.Models.Lecturer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>lecturers Table</h2>
+<h4 style="float:right" class="btn btn-primary">Hello @Session["userName"]<span class="glyphicon glyphicon-user"> </span></h4>
+<p>
+    <a href="@Url.Action("Create","Lecturers")" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus"></span>
+        Add New Lecturer
+    </a>
+</p>
+@using (Html.BeginForm())
+{
+    <p>
+        <b>Search</b>: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Material)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().University.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Material)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.University.Name)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit","Lecturers",new { id = item.Id })">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+                <a href="@Url.Action("Delete", "lecturers", new { id=item.Id })">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, SearchString = Request.QueryString["SearchString"] }))

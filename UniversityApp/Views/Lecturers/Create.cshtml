@@ -1,0 +1,116 @@
+﻿@model UniversityApp.Models.Lecturer
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h2>New Lecturer</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@//Radio button*@
+                @Html.RadioButtonFor(model => model.Gender, "Male") Male &nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.RadioButtonFor(model => model.Gender, "Female") Female
+                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Material, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" id="Id" name="Material">
+                    <option>Archaeology and Anthropology</option>
+                    <option>Biology</option>
+                    <option>Biomedical Sciences</option>
+                    <option>Chemistry</option>
+                    <option>Classics and Modern Languages</option>
+                    <option>Computer Science</option>
+                    <option>Earth Sciences (Geology)</option>
+                    <option>Economics and Management</option>
+                    <option>Engineering Science</option>
+                    <option>European and Middle Eastern Languages</option>
+                    <option>Fine Art</option>
+                    <option>Geography</option>
+                    <option>Law (Jurisprudence)</option>
+                    <option>History and Economics</option>
+                    <option>History and Politics</option>
+                    <option>History of Art</option>
+                    <option>Materials Science</option>
+                    <option>Mathematics</option>
+                    <option>Medicine</option>
+                    <option>Modern Languages</option>
+                    <option>Music</option>
+                    <option>Oriental Studies</option>
+                    <option>Philosophy and Theology</option>
+                    <option>Physics</option>
+                    <option>Religion and Oriental Studies</option>
+                    <option>Theology and Religion</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.Material, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UnvId, "UnvId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("UnvId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UnvId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                @ViewBag.Message
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
